@@ -1,54 +1,25 @@
-
-def add(x, y):
-    return x + y
-
-
-def subtract(x, y):
-    return x - y
-
-
-def multiply(x, y):
-    return x * y
-
-
-def divide(x, y):
-    return x / y
-
-
-print("Select operation that you would like!")
-print("1.Add")
-print("2.Subtract")
-print("3.Multiply")
-print("4.Divide")
-
-while True:
-
-    choice = input("Enter choice(1/2/3/4): ")
-
-
-    if choice in ('1', '2', '3', '4'):
-        try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-            continue
-
-        if choice == '1':
-            print(num1, "+", num2, "=", add(num1, num2))
-
-        elif choice == '2':
-            print(num1, "-", num2, "=", subtract(num1, num2))
-
-        elif choice == '3':
-            print(num1, "*", num2, "=", multiply(num1, num2))
-
-        elif choice == '4':
-            print(num1, "/", num2, "=", divide(num1, num2))
-        
-   
-        next_calculation = input("Let's do next calculation? (yes/no): ")
-        if next_calculation == "no":
-          break
-    else:
-        print("Invalid Input")
+from operator import add, sub, mul
+ 
+def calc():
+   op = input("Enter operator +-*: ")
+   n1 = int(input('Fist number: '))
+   n2 = int(input('Second number: '))
+   operators = {'+': add(n1, n2), '-': sub(n1, n2), '*': mul(n1, n2)}
+   if op in operators:
+       print('{} {} {} = {}'.format(n1, op, n2, operators[op]))
+   input('Press enter to return menu\n')
+ 
+def menu():
+   while True:
+       print('(1) Calculate 2 numbers')
+       print('(Q) Quit')
+       choice = input('Enter your choice: ').lower()
+       if choice == '1':
+           calc()
+       elif choice == 'q':
+           return False
+       else:
+           print('Not a correct choice: <{}>,try again'.format(choice))
+ 
+if __name__ == '__main__':
+   menu()
